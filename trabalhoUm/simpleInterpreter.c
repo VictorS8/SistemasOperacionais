@@ -14,7 +14,7 @@ void main()
         int status;
         char inputtedCommand[30];
 
-        printf("Digite um comando: \"0\" para sair - ");
+        printf("Digite um comando simples: \"0\" para sair - ");
         scanf("%s", inputtedCommand);
 
         if (strcmp(inputtedCommand, "0") == 0)
@@ -23,13 +23,13 @@ void main()
         }
 
         pid = fork();
-        if (!pid)
+        if (pid != 0)
         {
-            execlp(inputtedCommand, inputtedCommand, NULL);
+            waitpid(pid, &status, 0);
         }
         else
         {
-            waitpid(pid, &status, 0);
+            execlp(inputtedCommand, inputtedCommand, NULL);
         }
     }
 }
