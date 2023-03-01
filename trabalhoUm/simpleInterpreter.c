@@ -11,7 +11,6 @@ void main()
     while (1)
     {
         pid_t pid;
-        int status;
         char inputtedCommand[30];
 
         printf("Digite um comando simples: \"0\" para sair - ");
@@ -19,12 +18,14 @@ void main()
 
         if (strcmp(inputtedCommand, "0") == 0)
         {
+            printf("Shell is closed!");
             exit(0);
         }
 
         pid = fork();
         if (pid != 0)
         {
+            int status;
             waitpid(pid, &status, 0);
         }
         else
